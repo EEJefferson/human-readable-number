@@ -37,5 +37,7 @@ module.exports = function toReadable (number) {
         `${via[str[0]]} hundred ${via[str[1]+'0']} ${via[str[2]]}`
     } else if(str.length===3&&str.slice(-1)=='0'){
         `${via[str[0]]} hundred ${via[str[1]+'0']}`
+    } else if(via[str[1]]==='0'){
+        `${via[str[0]]} hundred ${via[str[2]]}`
     }
 }
