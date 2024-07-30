@@ -1,5 +1,5 @@
 module.exports = function toReadable(number) {
-  const via = {
+  const obj = {
     0: "zero",
     1: "one",
     2: "two",
@@ -30,25 +30,29 @@ module.exports = function toReadable(number) {
     90: "ninety",
   };
 
-  let str = number.toString();
+  const str = String(number);
 
-  if (via[str]) return via[str];
+  if (obj[str]) return obj[str];
 
   if (str.length === 2) {
     const tens = str[0] + '0';
     const units = str[1];
-    return `${via[tens]} ${via[units]}`;
+    return `${obj[tens]} ${obj[units]}`;
   }
 
   if (str.length === 3) {
-    const hundreds = via[str[0]] + ' hundred';
+    const hundreds = obj[str[0]] + ' hundred';
     const tensUnits = str.slice(1);
     if (tensUnits === '00') {
       return hundreds;
-    } else if (tensUnits[1] === '0') {
-      return `${hundreds} ${via[tensUnits[0] + '0']}`;
+    } else if (obj[tensUnits]) {
+      return `${hundreds} ${obj[tensUnits]}`;
     } else {
-      return `${hundreds} ${via[tensUnits[0] + '0']} ${via[tensUnits[1]]}`;
+      const tens = tensUnits[0] + '0';
+      const units = tensUnits[1];
+      return `${hundreds} ${obj[tens]} ${obj[units]}`.replace(/ undefined\s+/g, " ");
     }
   }
+
+  return 'Число вне диапазона';
 };
