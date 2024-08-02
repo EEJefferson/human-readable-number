@@ -48,8 +48,9 @@ module.exports = function toReadable(number) {
     } else if (tensUnits[1] === '0') {
       return `${hundreds} ${via[tensUnits[0] + '0']}`;
     } else {
-      return `${hundreds} ${via[tensUnits[0] + '0']} ${via[tensUnits[1]]}`;
-        }
+       return `${hundreds} ${via[tens]} ${via[units]}`.replace(/ undefined\s+/g, " ");
+    }
   }
-  return ''; 
+
+  return 'Число вне диапазона';
 };
