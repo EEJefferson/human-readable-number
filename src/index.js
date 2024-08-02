@@ -37,7 +37,7 @@ module.exports = function toReadable(number) {
   if (str.length === 2) {
     const tens = str[0] + '0';
     const units = str[1];
-    return `${via[tens]} ${via[units]}`.trim();
+    return `${via[tens]} ${via[units]}`;
   }
 
   if (str.length === 3) {
@@ -46,13 +46,9 @@ module.exports = function toReadable(number) {
     if (tensUnits === '00') {
       return hundreds;
     } else if (tensUnits[1] === '0') {
-      return `${hundreds} ${via[tensUnits[0] + '0']}`.trim();
+      return `${hundreds} ${via[tensUnits[0] + '0']}`;
     } else {
-      const tens = tensUnits[0] + '0';
-      const units = tensUnits[1];
-      return `${hundreds} ${via[tens]} ${via[units]}`.trim();
+      return `${hundreds} ${via[tensUnits[0] + '0']} ${via[tensUnits[1]]}`;
     }
   }
-
-  return 'Number out of range';
 };
