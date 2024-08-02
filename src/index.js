@@ -50,7 +50,7 @@ module.exports = function toReadable(number) {
     } else {
       const tens = tensUnits[0] + '0';
       const units = tensUnits[1];
-      return `${hundreds} ${via[tens]} ${via[units]}`;
+    return `${hundreds} ${obj[tens]} ${obj[units]}`.replace(/ undefined\s+/g, " ");
     }
   }
 };
