@@ -1,5 +1,5 @@
 module.exports = function toReadable(number) {
-  const obj = {
+  const via = {
     0: "zero",
     1: "one",
     2: "two",
@@ -32,25 +32,25 @@ module.exports = function toReadable(number) {
 
   const str = String(number);
 
-  if (obj[str]) return obj[str];
+  if (via[str]) return via[str];
 
   if (str.length === 2) {
     const tens = str[0] + '0';
     const units = str[1];
-    return `${obj[tens]} ${obj[units]}`;
+    return `${via[tens]} ${via[units]}`;
   }
 
   if (str.length === 3) {
-    const hundreds = obj[str[0]] + ' hundred';
+    const hundreds = via[str[0]] + ' hundred';
     const tensUnits = str.slice(1);
     if (tensUnits === '00') {
       return hundreds;
-    } else if (obj[tensUnits]) {
-      return `${hundreds} ${obj[tensUnits]}`;
+    } else if (via[tensUnits]) {
+      return `${hundreds} ${via[tensUnits]}`;
     } else {
       const tens = tensUnits[0] + '0';
       const units = tensUnits[1];
-      return `${hundreds} ${obj[tens]} ${obj[units]}`.replace(/ undefined\s+/g, " ");
+      return `${hundreds} ${via[tens]} ${via[units]}`.replace(/ undefined\s+/g, " ");
     }
   }
 
