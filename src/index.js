@@ -1,6 +1,6 @@
 module.exports = function toReadable(number) {
   const via = {
-    0: "zero",
+        0: "zero",
     1: "one",
     2: "two",
     3: "three",
@@ -30,7 +30,7 @@ module.exports = function toReadable(number) {
     90: "ninety",
   };
 
-  const str = String(number);
+  let str = number.toString();
 
   if (via[str]) return via[str];
 
@@ -45,12 +45,11 @@ module.exports = function toReadable(number) {
     const tensUnits = str.slice(1);
     if (tensUnits === '00') {
       return hundreds;
-    } else if (via[tensUnits]) {
-      return `${hundreds} ${via[tensUnits]}`;
+    } else if (tensUnits[1] === '0') {
+      return `${hundreds} ${via[tensUnits[0] + '0']}`;
     } else {
-      const tens = tensUnits[0] + '0';
-      const units = tensUnits[1];
-    return `${hundreds} ${obj[tens]} ${obj[units]}`.replace(/ undefined\s+/g, " ");
-    }
+      return `${hundreds} ${via[tensUnits[0] + '0']} ${via[tensUnits[1]]}`;
+        }
   }
+  return ''; 
 };
