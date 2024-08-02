@@ -1,6 +1,6 @@
 module.exports = function toReadable(number) {
   const via = {
-        0: "zero",
+    0: "zero",
     1: "one",
     2: "two",
     3: "three",
@@ -37,7 +37,7 @@ module.exports = function toReadable(number) {
   if (str.length === 2) {
     const tens = str[0] + '0';
     const units = str[1];
-    return `${via[tens]} ${via[units]}`;
+    return `${via[tens]} ${via[units]}`.trim();
   }
 
   if (str.length === 3) {
@@ -46,11 +46,13 @@ module.exports = function toReadable(number) {
     if (tensUnits === '00') {
       return hundreds;
     } else if (tensUnits[1] === '0') {
-      return `${hundreds} ${via[tensUnits[0] + '0']}`;
+      return `${hundreds} ${via[tensUnits[0] + '0']}`.trim();
     } else {
-       return `${hundreds} ${via[tens]} ${via[units]}`.replace(/ undefined\s+/g, " ");
+      const tens = tensUnits[0] + '0';
+      const units = tensUnits[1];
+      return `${hundreds} ${via[tens]} ${via[units]}`.trim();
     }
   }
 
-  return 'Число вне диапазона';
+  return 'Number out of range';
 };
